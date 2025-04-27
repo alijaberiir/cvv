@@ -1,0 +1,25 @@
+{% extends 'resume/base/base_error.html' %}
+{% load i18n %}
+{% load static %}
+{% block 'title' %}403 - Forbidden{% endblock 'title' %}
+
+{% block 'body' %}
+{% if LANGUAGE_CODE == 'fa' %}
+<div style="direction: rtl;" class="container text-center">
+    <h1 class="display-1">۴۰۳</h1>
+    <h4>ممنوع !</h4>
+    <p>
+دسترسی به صفحه یا منبعی‌ که شما در تلاش برای رسیدن به آن هستید به دلایل مختلفی امکان‌پذیر نیست    </p>
+    <a href="{% url 'resume:index'%}" class="btn btn-primary">بازگشت به صفحه اصلی</a>
+</div>
+{% else %}
+<div class="container text-center">
+    <h1 class="display-1">403</h1>
+    <h4>Forbidden</h4>
+    <p>
+    The page or resource you are trying to access is not available for a variety of reasons
+    </p>
+    <a href="{% url 'resume:index'%}" class="btn btn-primary">Back to homepage</a>
+</div>
+{% endif %}
+{% endblock 'body' %}

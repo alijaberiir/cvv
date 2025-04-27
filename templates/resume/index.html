@@ -1,0 +1,122 @@
+{% extends 'resume/base/base.html' %}
+{% load i18n %}
+{% load static %}
+{% load base_tags %}
+{% block main %}
+{% block title %}{% endblock title %}
+
+ {% for part in object_list %}
+    {% if LANGUAGE_CODE == 'en' %}
+     <section id="{{part.part_name_en}}" style="{% if part.rtl_or_ltr == 'rtl' %}direction: rtl!important;{% else %}direction: ltr!important;{% endif %}" class="section section--border-bottom mt-0" >
+        <div class="container" style="">
+            <div class="row row--padded rad-animation-group rad-fade-down flex-column-reverse flex-md-row rad-waiting">
+               
+                <div class="col-12 {% if part.image_en %}col-md-6{% endif %} d-flex align-items-end justify-content-center">
+                    <div style="text-align:left!important;float: left!important;direction: ltr!important;" >
+                        {% if forloop.first %}
+                            <h1 class="mb-1">{% if part.title_en %}{{part.title_en}}{% endif %}</h1>
+                        {% else %}
+                            <h2 class="mb-1">{% if part.title_en %}{{part.title_en}}{% endif %}</h2>
+                        {% endif %}
+                        <h3 style="font-weight: 300;">
+                            {% if part.sub_title_en %}
+                                {{part.sub_title_en}}
+                            {% endif %}
+                        </h3>
+                        
+                        <p>{{part.description_en|safe}}</p>
+                        {% if not part.link == '#' %}
+                        <a href="{{part.link}}" style="{% if part.rtl_or_ltr == 'ltr' %}float:left;{% else %}float:right;{% endif %}" class="btn btn-primary">{{part.link_name_en}}</a>
+                        {% endif %}
+                    </div>
+                    
+                </div>
+                {% if part.image_en %}
+                <div class="col-12 col-md-6 d-flex align-items-end justify-content-center"> 
+                    <img class="img-responsive" src="{{part.image_en.url}}" alt="{% if part.title_en %}{{part.title_en}}{% endif %}">
+                </div>
+                {% endif %}
+            </div>
+        </div>
+     </section>
+     {% elif LANGUAGE_CODE == 'fa' %}
+            
+        
+        <section id="{{part.part_name_en}}" style="{% if part.rtl_or_ltr == 'rtl' %}direction: rtl!important;{% else %}direction: ltr!important;{% endif %}" class="section section--border-bottom mt-0" >
+        <div class="container" style="">
+            <div class="row row--padded rad-animation-group rad-fade-down flex-column-reverse flex-md-row rad-waiting">
+               
+                <div class="col-12 {% if part.image_fa %}col-md-6{% endif %} d-flex align-items-end justify-content-center">
+                    <div style="text-align:right!important;float: right!important;direction: rtl!important;" >
+                        {% if forloop.first %}
+                            <h1 class="mb-1">{% if part.title_fa %}{{part.title_fa}}{% endif %}</h1>
+                        {% else %}
+                            <h2 class="mb-1">{% if part.title_fa %}{{part.title_fa}}{% endif %}</h2>
+                        {% endif %}
+                        <h3 style="font-weight: 300;">
+                        {% if part.sub_title_fa %}
+                            {{part.sub_title_fa}}
+                        {% endif %}
+                        </h3>
+                        <p>{{part.description_fa|safe}}</p>
+                        {% if not part.link == '#' %}
+                        <a href="{{part.link}}" style="{% if part.rtl_or_ltr == 'ltr' %}float:left;{% else %}float:right;{% endif %}" class="btn btn-primary">{{part.link_name_fa}}</a>
+                        {% endif %}
+                    </div>
+                </div>
+                {% if part.image_fa %}
+                <div class="col-12 col-md-6 d-flex align-items-end justify-content-center">
+                    <img class="img-responsive" src="{{part.image_fa.url}}" alt="{% if part.title_fa %}{{part.title_fa}}{% endif %}">
+                </div>
+                {% endif %}
+            </div>
+
+                    
+        </div>
+     </section>
+     {% endif %}
+{% endfor %}
+
+
+
+{% clinets %}
+<section {% if LANGUAGE_CODE == 'fa' %} style="direction:rtl"{% endif %}  id="contact" class="section section--contact">
+    <div class="container">
+
+        <div class="contact">
+            <h2> {% translate "Contact" %}</h2>
+            <div class="row pt-2">
+                <div class="col-12 col-lg-7">
+                    <form  action="{% url 'resume:newcontact' %}"  method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-12 col-sm-6">
+                                {{form.full_name}}
+                            </div>
+                            <div class="col-12 col-sm-6">
+                               {{form.email}}
+                            </div>
+                        </div>
+                        <div class="row pt-4">
+                            <div class="col-12">
+                                {{form.massages}}
+                            </div>
+                        </div>
+                        <div class="row pt-4">
+                             <div class="col-md-6 col-12">
+                               {{form.captcha}}
+                             </div>
+                            <div class="col-md-6 col-12 mt-2" style="display: flex; align-items: end; justify-content:end;"> 
+                                <button type="submit" class="btn  btn-primary">{% translate "Send Message" %}</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+             {% contactinfo %}
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock main %}

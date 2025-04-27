@@ -1,0 +1,36 @@
+@font-face {
+    font-family: 'Vazirmatn';
+    src: url('/static/unfold/fonts/Vazirmatn[wght].woff2') format('woff2 supports variations'),
+         url('/static/unfold/fonts/Vazirmatn[wght].woff2') format('woff2-variations');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+  }
+
+
+html div p span h1 h2 h3 h4 h5 h6 a button section caption th td table{
+font-family: "Vazirmatn", sans-serif!important;
+}
+.font-sans {
+    font-family: "Vazirmatn", sans-serif!important;
+}
+
+
+caption {
+    text-align: right !important;
+    margin-right: 5px;
+}
+th {
+    text-align: right !important;
+}
+
+
+td {
+    text-align: right !important;
+}
+
+
+.shadow-lg {
+    left: -.5rem !important;
+    right: unset;
+}

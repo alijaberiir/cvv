@@ -1,0 +1,72 @@
+{% load i18n  static base_tags %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_available_languages as LANGUAGES %}
+<header class="header fixed-top rad-animation-group header--sticky" id="header">
+          
+    <div class="container rad-fade-in rad-waiting rad-animate" style="animation-delay: 0.1s;">
+        <nav class="navbar navbar-expand-lg navbar-light p-0">
+            <a class="navbar-brand" href="{% url 'resume:index' %}">
+                <img src="{% static 'img/logo.webp'%}" alt="Hamed Biglari">
+            </a>    
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent, #header" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+           
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                <ul {% if LANGUAGE_CODE == 'fa' %}style="margin-right: -60px"{% else %}style="margin-right: -20px"{% endif %} class="navbar-nav ml-lg-auto">
+                    {% for part in items_list|slice:':4' %}
+                    <li class="nav-item"><a class="nav-link" href="{% url 'resume:index' %}#{{part.part_name_en}}">
+                        {% if LANGUAGE_CODE == 'fa' %}
+                            {{part.part_name_fa}}
+                        {% else %}
+                            {{part.part_name_en}}
+                        {% endif %}
+                    </a></li>
+                    {% endfor %}
+                    {% if object_list.count > 4 %}
+                    <li style="direction: rtl" class="dropdown nav-item" >
+                        <a class="nav-link" href="#{{part.part_name_en}}">{% translate 'More' %}</a>
+                        <div class="dropdown-content">
+                        {% for part in object_list|slice:'4:' %}
+                            <a  href="{% url 'resume:index' %}#{{part.part_name_en}}">
+                                {% if LANGUAGE_CODE == 'fa' %}
+                                    {{part.part_name_fa}}
+                                {% else %}
+                                    {{part.part_name_en}}
+                                {% endif %}
+                            </a>
+                         {% endfor %}
+                        </div>
+                    </li>
+                     {% endif %}
+                    <li class="nav-item"><a  class="nav-link" href="{% url 'blog:post_list' %}">{% translate 'Blogs' %}</a></li>
+                    <li class="nav-item"><a  class="nav-link" href="{% url 'resume:index' %}#contact">{% translate 'Contact' %}</a></li>
+                    
+                    <li style="direction: rtl" class="dropdown nav-item" >
+                        <span  class="nav-link" >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="m12.87 15.07l-2.54-2.51l.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35C8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5l3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7l1.62-4.33L19.12 17z"/></svg>
+                        </span>
+
+                        <form class="dropdown-content" action="{% url 'set_language' %}" method="post">{% csrf_token %}
+                            {% for lang_code, lang_name in LANGUAGES %}
+                                <button class="dropdown-item"  type="submit" 
+                                name="language" 
+                                value="{{ lang_code }}">
+                                {{ lang_name }}
+                                </button>
+                            {% endfor %}
+                            {% if LANGUAGE_CODE == 'en' %}
+                                <input name="next" type="hidden" value="{{ request.path|cut:'/en' }}">
+                            {% else %}
+                                <input name="next" type="hidden" value="{{ request.path }}">
+                            {% endif %}
+                        </form>
+
+                    </li>
+                </ul>
+
+            </div>
+        </nav>
+    </div>
+</header>

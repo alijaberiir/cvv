@@ -1,0 +1,21 @@
+{% load i18n static base_tags %}
+<div  class="col-md-6 col-xl-4 col-12  p-2">
+    <div class="card">
+        {% if obj.get_meta_image %}
+            <img  height="242.98px" style="object-fit: cover;" src="{{obj.get_meta_image}}">    
+        {% endif %}
+            
+        <div class="p-3 card-body d-flex flex-column justify-content-between">
+            <div>
+                {% autoescape off %}
+                    <h5 class="mb-0">{{obj.get_meta_title|truncatechars:30|title}}</h5>
+                    <p>{{obj.get_content|striptags|truncatechars_html:80}}</p>
+                {% endautoescape %}
+            </div>
+            <div class="mt-3 blog-btn">
+                <a href="{% url 'blog:post_detail' obj.slug %}"  class="btn btn-primary">{% translate "Read More" %}</a>
+            </div>
+        </div>
+
+    </div>
+</div>

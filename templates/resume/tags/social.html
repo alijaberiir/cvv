@@ -1,0 +1,14 @@
+{% load static %}
+{% if socials %}
+<section class="section--cta pt-0 section-link">
+    <div class="container">
+        <div class="row platform-links">
+            <div style="text-align: center" class="col-12">
+                {% for social in socials %}
+                <a href="{{social.link}}" aria-label="{{social.icon}}" title="{{social.icon}}" target="_blank">{{social.icon_svg}}</a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}

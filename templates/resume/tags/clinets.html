@@ -1,0 +1,34 @@
+{% load i18n %}
+{% load static %}
+{% get_current_language as LANGUAGE_CODE %}
+{% if clinets %}
+<section  {% if LANGUAGE_CODE == 'fa' %} style="direction:rtl"{% endif %}  class="section section--border-bottom">
+            <div class="container">
+                <h2   class="rad-animation-group rad-fade-down rad-waiting">
+                    {% translate "Projecs" %}
+               </h2>
+                <div class="row row--padded rad-animation-group rad-fade-down rad-waiting">
+                    <div class="col-12">
+                        <div class="clients">
+                           {% for clinet in clinets %}
+                            <div class="clients__item"  data-bs-toggle="tooltip" data-bs-placement="top" title="{{clinet.name_en}}">
+                                <a target="_blank" href="{{clinet.link}}" >
+                                <img
+                                    class="lozad clinet-img"
+                                    src="{{clinet.image.url}}"
+                                    alt="{{clinet.name_en}}"
+                                    />
+                                
+                                </a>
+
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+{% else %}
+<hr>
+{% endif %}

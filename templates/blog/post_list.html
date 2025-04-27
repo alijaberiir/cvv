@@ -1,0 +1,50 @@
+{% extends 'resume/base/base.html' %}
+{% load i18n static base_tags %}
+{% get_current_language as LANGUAGE_CODE %}
+{% block meta %}
+<title>{% translate 'Hamed Biglari' %} | {% translate 'Blogs' %}</title>
+{% endblock meta %}
+{% block main %}
+<section class="section h-100">
+    <div class="container {% if LANGUAGE_CODE == 'fa' %}rtl{% endif %}">
+        <h1>{% translate 'Blogs' %}</h1>
+        
+        <div class="row d-flex">
+            {% for obj in object_list %} 
+                {% include './tags/post.html' %}
+            {% endfor %}
+            <div class="col-md-12 mt-5">
+                {% if page_obj.paginator.num_pages > 1  %}
+                    <nav class="d-flex justify-content-center">
+                        <ul class="pager">
+                            {% if page_obj.has_previous %}
+                                <li class="pager__item pager__item--prev">
+                                    <a class="pager__link" href="?page={{ page_obj.previous_page_number }}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" viewBox="0 0 24 24"><path fill="currentColor" d="m14 18l-6-6l6-6l1.4 1.4l-4.6 4.6l4.6 4.6z"/></svg>
+                                    </a>
+                                </li>
+                            {% endif %}
+                            {% for num in page_obj.paginator.page_range %}
+                                    {% if num == page_obj.number  %}
+                                        <li class="pager__item"><a class="pager__link active" href="?page={{ num }}">{{ num }}</a></li>
+                                    {% else %}
+                                        {% if num < 4 %}
+                                        <li class="pager__item"><a class="pager__link" href="?page={{ num }}">{{ num }}</a></li>
+                                        {% endif %}
+                                    {% endif %}
+                            {% endfor %}
+                            {% if page_obj.has_next %}
+                                <li class="pager__item pager__item--next">
+                                    <a class="pager__link" href="?page={{ page_obj.next_page_number }}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" viewBox="0 0 24 24"><path fill="currentColor" d="M12.6 12L8 7.4L9.4 6l6 6l-6 6L8 16.6z"/></svg>
+                                    </a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock main %}

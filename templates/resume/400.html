@@ -1,0 +1,25 @@
+{% extends 'resume/base/base_error.html' %}
+{% load i18n %}
+{% load static %}
+{% block 'title' %}400 - Bad Request{% endblock 'title' %}
+
+{% block 'body' %}
+{% if LANGUAGE_CODE == 'fa' %}
+<div style="direction: rtl;" class="container text-center">
+    <h1 class="display-1">۴۰۰</h1>
+    <h4>درخواست بد !<h4>
+    <p>مرورگر شما درخواستی ارسال کرد که سرور قادر به درک آن نبود    </p>
+
+    <a href="{% url 'resume:index'%}" class="btn btn-primary">بازگشت به صفحه اصلی</a>
+</div>
+{% else %}
+<div class="container text-center">
+    <h1 class="display-1">400</h1>
+    <h4>Bad Request</h4>
+    <p>
+    Your browser sent a request that this server could not understand.
+    </p>
+    <a href="{% url 'resume:index'%}" class="btn btn-primary">Back to homepage</a>
+</div>
+{% endif %}
+{% endblock 'body' %}

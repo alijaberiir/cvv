@@ -1,0 +1,21 @@
+{% load i18n %}
+{% load static %}
+{% get_current_language as LANGUAGE_CODE %}
+<html lang="en">
+    <head>
+        <meta name="generator" content="Hugo 0.62.1" />
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta http-equiv="x-ua-compatible" content="ie=edge" />
+         <title>
+            {% translate "Ali Jaberi" %} | {% block 'title' %}{% endblock 'title' %}
+        </title>
+        <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+    </head>
+<body>
+    <section class="section four-o-four">
+      {% block 'body' %}{% endblock 'body' %}
+    </section>
+
+</body>
+</html>

@@ -1,0 +1,21 @@
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+{% load static %}
+<div class="col-12 col-lg-5 contact__info"  {% if LANGUAGE_CODE == 'fa' %} style="text-align: right;direction: ltr;"  {% endif %}>
+        <span>
+            <strong>{% translate "Phone Number" %}</strong>
+            {{contactinfo.phone}}
+        </span>
+        <span>
+            <strong>{% translate "Email" %}</strong>
+            <a href="mailto:{{contactinfo.email}}">{{contactinfo.email}}</a>
+        </span>
+        <span>
+            <strong>{% translate "Address" %}</strong>
+            {% if LANGUAGE_CODE == 'fa' %}
+                {{contactinfo.address_fa|safe}}
+            {% else %}
+                {{contactinfo.address_en|safe}}
+            {% endif %}
+        </span>
+</div>

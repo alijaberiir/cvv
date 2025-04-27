@@ -1,0 +1,25 @@
+{% extends 'resume/base/base_error.html' %}
+{% load i18n %}
+{% load static %}
+{% block 'title' %}500 - Internal Server Error{% endblock 'title' %}
+
+{% block 'body' %}
+{% if LANGUAGE_CODE == 'fa' %}
+<div style="direction: rtl;" class="container text-center">
+    <h1 class="display-1">۵۰۰</h1>
+    <h4>خطای سرور داخلی</h4>
+    <p>منبعی که به دنبال آن هستید مشکل دارد و نمایش داده نمی شود.</p>
+
+    <a href="{% url 'resume:index'%}" class="btn btn-primary">بازگشت به صفحه اصلی</a>
+</div>
+{% else %}
+<div class="container text-center">
+    <h1 class="display-1">500</h1>
+    <h4>Internal Server Error</h4>
+    <p>
+    There is a problem with the resource you are looking for,and it cannot be displayed.
+    </p>
+    <a href="{% url 'resume:index'%}" class="btn btn-primary">Back to homepage</a>
+</div>
+{% endif %}
+{% endblock 'body' %}
